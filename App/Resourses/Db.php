@@ -42,5 +42,22 @@ class Db
         return $stmt;
     }
     
+    public function row(string $sql, array $data = []) 
+    {
+        $result = $this->query($sql, $data);
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function column(string $sql, array $data = []) 
+    {
+        $result = $this->query($sql, $data);
+        return $result->fetchColumn();
+    }
+    
+    public function lastInsertId() 
+    {
+        return $this->dbh->lastInsertId();
+    }
+    
     
 }
