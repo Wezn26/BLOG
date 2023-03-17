@@ -4,6 +4,10 @@
 
 namespace App\Resourses;
 
+use App\Traits\Singleton;
+use PDO;
+
+
 /**
  * Description of Db
  *
@@ -11,5 +15,32 @@ namespace App\Resourses;
  */
 class Db 
 {
-    //put your code here
+    use Singleton;
+    
+    private $dbh;
+    
+    public function __construct() 
+    {
+        require './config.php';
+        $this->dbh = new PDO(DSN);
+    }
+    
+    public function query(string $sql, array $data = []) 
+    {
+        $stmt = $this->dbh->prepare($sql);
+        if (!empty($data)) {
+            foreach ($data as $key => $value) {
+                if (is_int($value)) {
+                    $type = PDO::PARAM_INT;
+                } else {
+                    $type = PDO::PARAM_STR;
+                }
+                $stmt->bindValue(':'.$key, $value, $type);
+            } 
+        }
+        $stmt->execute();
+        return $stmt;
+    }
+    
+    
 }
