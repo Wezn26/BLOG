@@ -5,5 +5,6 @@ require './autoload.php';
 session_start();
 
 
-echo 'Hello World!!!';
+$router = new \App\Router\Router();
+$router->run();
 

@@ -21,7 +21,7 @@ class Db
     
     public function __construct() 
     {
-        require './config.php';
+        require __DIR__ . '/config.php';
         $this->dbh = new PDO(DSN);
     }
     
