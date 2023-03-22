@@ -7,6 +7,8 @@
 
 namespace App\Router;
 
+use App\View\View;
+
 /**
  * Description of Router
  *
@@ -65,13 +67,13 @@ class Router
                     $controller = new $path($this->params);
                     $controller->$action();
                 } else {
-                    echo 'Error 404';
+                    View::errorcode(404);
                 }
             } else {
-                echo 'Error 404';
+                View::errorcode(404);
             }
         } else {
-            echo 'Error 403';
+            View::errorcode(403);
         }
     }
 }
