@@ -3,6 +3,8 @@
 
 namespace App\Models;
 
+use App\Resourses\Db;
+
 /**
  * Description of Main
  *
