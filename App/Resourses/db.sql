@@ -1,4 +1,4 @@
-CREATE TABLE `news` (
+CREATE TABLE `posts` (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`name`	TEXT,
 	`description`	TEXT,

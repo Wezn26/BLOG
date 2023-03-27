@@ -35,7 +35,7 @@ class Main
     
     public static function postsCount() 
     {
-        $db = Db::give();
+        $db = new Db();
         $sql = 'SELECT COUNT(id) FROM ' . static::TABLE;
         return $db->column($sql);
     }
@@ -43,7 +43,7 @@ class Main
     public static function postsList($route) 
     {
         $max = 2;
-        $db = Db::give();
+        $db = new Db();
         $data = [
             'max'   => $max,
             'start' => ((($route['page'] ?? 1) - 1) * $max),
