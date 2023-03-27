@@ -90,7 +90,7 @@ class Admin
         return $db->lastInsertId();
     }
     
-    public static function postedit($post, $id) 
+    public static function postEdit($post, $id) 
     {
         $db = Db::give();
         $data = [
