@@ -4,6 +4,8 @@
 namespace App\Controllers;
 
 use App\Models\Admin;
+use App\Models\Main;
+use App\Resourses\Pagination;
 
 /**
  * Description of AdminController
@@ -77,11 +79,26 @@ class AdminController extends Controller
     
     public function deleteAction() 
     {
-        echo 'Delete!!!';
+        if (!Admin::isPostExist($this->route['id'])) {
+            $this->view->errorcode(404);
+        }
+        Admin::postDelete($this->route['id']);
+        $this->view->redirect('admin/posts');
+    }
+    
+    public function logoutAction() 
+    {
+        unset($_SESSION['admin']);
+        $this->view->redirect('admin/login');
     }
     
     public function postsAction() 
     {
-        $this->view->render('Post List');
+        $pagination = new Pagination($this->route, Main::postsCount(), 2);
+        $vars = [
+            'pagination' => $pagination->get(),
+            'list' => Main::postsList($this->route)
+        ];
+        $this->view->render('Post List', $vars);
     }
 }
