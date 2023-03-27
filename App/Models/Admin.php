@@ -40,11 +40,13 @@ class Admin
         $result = $db->row($sql, $data);
         
         if (!$result) {
+            static::$error = 'Login or password incorrect!!!';
             return false;
         }
         $password = $result[0]['password'];
         
         if (!password_verify($adminpass, $password)) {
+            static::$error = 'Password incorrect!!!';
             return false;
         } else {
             return true;
@@ -109,12 +111,13 @@ class Admin
         $db->query($sql, $data);
     }
     
-    public static function postUploadImage($file, $id) 
+      public static function postUploadImage($path, $id) 
     {
-        $image = new Imagick($file);
+        $img = new \Imagick($path);               
         $img->cropThumbnailImage(1080, 600);
         $img->setImageCompressionQuality(80);        
         $img->writeImage('public/uploaded/'.$id.'.jpg');
+        //move_uploaded_file($img, 'public/uploaded/' . $id . '.jpg');
     }
     
     public static function isPostExist($id) 

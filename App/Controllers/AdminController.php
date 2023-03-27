@@ -74,7 +74,7 @@ class AdminController extends Controller
         }
         
         $vars = ['data' => Admin::postData($this->route['id'])[0]];
-        $this->view-render('Edit Post!!!', $vars);
+        $this->view->render('Edit Post!!!', $vars);
     }
     
     public function deleteAction() 
