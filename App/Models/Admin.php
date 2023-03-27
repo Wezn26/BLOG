@@ -109,9 +109,9 @@ class Admin
         $db->query($sql, $data);
     }
     
-    public static function postUploadImage($path, $id) 
+    public static function postUploadImage($file, $id) 
     {
-        $image = new Imagick($path);
+        $image = new Imagick($file);
         $img->cropThumbnailImage(1080, 600);
         $img->setImageCompressionQuality(80);        
         $img->writeImage('public/uploaded/'.$id.'.jpg');
