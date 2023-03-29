@@ -35,7 +35,7 @@ class Main
     
     public static function postsCount() 
     {
-        $db = new Db();
+        $db = Db::give();
         $sql = 'SELECT COUNT(id) FROM ' . static::TABLE;
         return $db->column($sql);
     }

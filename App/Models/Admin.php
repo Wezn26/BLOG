@@ -34,7 +34,7 @@ class Admin
         $login = static::cleanData($post['login']);
         $adminpass = trim($post['password']);
         
-        $db = new Db();
+        $db = Db::give();
         $sql = 'SELECT password FROM ' . static::ADMIN . ' WHERE login=:login';
         $data = ['login' => $login];
         $result = $db->row($sql, $data);
@@ -79,7 +79,7 @@ class Admin
     
     public static function postAdd($post) 
     {
-        $db = new Db();
+        $db = Db::give();
         $data = [
             'name'        => $post['name'],
             'description' => $post['description'],
@@ -94,7 +94,7 @@ class Admin
     
     public static function postEdit($post, $id) 
     {
-        $db = new Db();
+        $db = Db::give();
         $data = [
             'id'          => $id,
             'name'        => $post['name'],
@@ -130,7 +130,7 @@ class Admin
     
     public static function postDelete($id) 
     {
-        $db = new Db();
+        $db = Db::give();
         $data = ['id' => $id];
         $sql = 'DELETE FROM ' . static::TABLE . ' WHERE id=:id';
         $db->query($sql, $data);
@@ -139,7 +139,7 @@ class Admin
     
     public static function postData($id) 
     {
-        $db = new Db();
+        $db = Db::give();
         $data = ['id' => $id];
         $sql = 'SELECT * FROM ' . static::TABLE . ' WHERE id=:id';
         return $db->row($sql, $data);
